@@ -1,0 +1,16 @@
+<div class="row header text-center">
+    <div class="col-md-12">
+        <h3>
+            Selecione o dia que desejar visualizar
+        </h3>
+        <select class="form-control form-control-md">
+            <option selected>Selecione o dia</option>
+            <option value="">2017/06/01</option>
+            <option value="">2017/06/02</option>
+            <option value="">2017/06/03</option>
+            <option value="">2017/06/04</option>
+        </select>
+    </div>
+</div>
+
+<app-chart *ngFor="let chart of listCharts" [dataChart]="chart"></app-chart>
