@@ -20,7 +20,7 @@ export class ViewStationComponent implements OnInit {
   }
 
 
-  upload(fileInput) {
+  public upload(fileInput) {
     let self = this;
     this.uploadFile.read(fileInput.files[0], [
       {
@@ -32,7 +32,7 @@ export class ViewStationComponent implements OnInit {
     ]);
   }
 
-  getHead() {
+  public getHead() {
     return Object.keys(this.list[0]).filter((key) => {
       return key !== "" && key !== "_id" && key !== "codigo_estacao" && key !== "data" && key !== "hora";
     });
@@ -42,28 +42,28 @@ export class ViewStationComponent implements OnInit {
     return this.list.slice(1, this.list.length);
   }
 
-  avg(item) {
+  public avg(item) {
     let som = 0;
     for (let x of this.getBody()) {
       som += parseFloat(x[item]) || 0;
-    } 
+    }
     return (som / (this.getBody().length - 1)).toFixed(2);
   }
 
-  min(item) {
+  public min(item) {
     let smaller = parseFloat(this.getBody()[0][item]);
-    for(let obj of this.getBody()) {
-      if(parseFloat(obj[item]) < smaller) {
+    for (let obj of this.getBody()) {
+      if (parseFloat(obj[item]) < smaller) {
         smaller = parseFloat(obj[item]);
       }
     }
     return smaller.toFixed(2);
   }
 
-  max(item) {
+  public max(item) {
     let larger = parseFloat(this.getBody()[0][item]);
-    for(let obj of this.getBody()) {
-      if(parseFloat(obj[item]) > larger) {
+    for (let obj of this.getBody()) {
+      if (parseFloat(obj[item]) > larger) {
         larger = parseFloat(obj[item]);
       }
     }
