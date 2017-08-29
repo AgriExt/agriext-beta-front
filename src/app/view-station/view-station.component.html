@@ -15,7 +15,7 @@
             <div class="input-group">
                 <label class="input-group-btn">
             <span class="btn btn-info">
-                Browse&hellip; <input type="file" style="display: none;" multiple>
+                Browse&hellip; <input type="file" style="display: none;" multiple (change)="upload($event.target)">
             </span>
         </label>
                 <input type="text" class="form-control" readonly>
@@ -29,7 +29,7 @@
 
     <div class="col-md-7 col-md-offset-1 text-center">
         <br>
-        <div class="tdados">
+        <div class="tdados" *ngIf="list != null">
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr>
@@ -39,115 +39,19 @@
                         <th>MIN</th>
 
                     </tr>
+
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">temp_inst</th>
-                        <td>30.26</td>
-                        <td>31.2</td>
-                        <td>27.8</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">temp_max</th>
-                        <td>30.65</td>
-                        <td>31.6</td>
-                        <td>27.9</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">temp_min</th>
-                        <td>29.35</td>
-                        <td>30.9</td>
-                        <td>25.9</td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">umid_inst</th>
-                        <td>61.00</td>
-                        <td>75</td>
-                        <td>54</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">umid_max</th>
-                        <td>65.66</td>
-                        <td>88</td>
-                        <td>58</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">umid_min</th>
-                        <td>58.66</td>
-                        <td>74</td>
-                        <td>53</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">pto_orvalho_inst</th>
-                        <td>21.83</td>
-                        <td>22.8</td>
-                        <td>20.8</td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">pto_orvalho_max</th>
-                        <td>22.62</td>
-                        <td>23.8</td>
-                        <td>22</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">pto_orvalho_min</th>
-                        <td>21.18</td>
-                        <td>22.6</td>
-                        <td>20.2</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">pressao</th>
-                        <td>1008.43</td>
-                        <td>1010.2</td>
-                        <td>1006.5</td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">pressao_max</th>
-                        <td>1008.88</td>
-                        <td>1010.4</td>
-                        <td>1006.6</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">pressao_min</th>
-                        <td>1008.35</td>
-                        <td>1010.1</td>
-                        <td>1006.4</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">vento_direcao</th>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">vento_vel</th>
-                        <td>103.44</td>
-                        <td>126</td>
-                        <td>76</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">vento_rajada</th>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">radiacao</th>
-                        <td>1828.00</td>
-                        <td>2397</td>
-                        <td>846</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">precipitacao</th>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                    </tr>
+                    <tr *ngFor="let item of getHead()">
+                        <th>{{item}}</th>
+                        <td>{{avg(item)}}</td>
+                        <td>{{max(item)}}</td>
+                        <td>{{min(item)}}</td>
+                    </tr>   
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<app-graphics></app-graphics>  
