@@ -12,21 +12,37 @@ import { csvToJson } from './../../util/CsvToJson';
 export class ViewStationComponent implements OnInit {
 
   private uploadFile: UploadFile;
-  private list: Array<any>;
+  private list: any;
+  private mapDates: any;
+
+  select;
 
   constructor() {
     this.uploadFile = new UploadFile();
-    this.list = null;
+    this.list;
+    this.mapDates = null;
   }
 
 
   public upload(fileInput) {
     let self = this;
-    this.uploadFile.read(fileInput.files[0], [
+    self.uploadFile.read(fileInput.files[0], [
       {
         event: "loadend",
         callback: function () {
           self.list = csvToJson(this.result);
+          self.mapDates = {};
+
+          for (let obj of self.getBody()) {
+            if (!self.mapDates[obj.data]) {
+              self.mapDates[obj.data] = [];
+              self.mapDates[obj.data].push(obj);
+            }
+            else {
+              self.mapDates[obj.data].push(obj);
+            }
+          }
+          console.log(self.mapDates)
         }
       }
     ]);
@@ -42,12 +58,16 @@ export class ViewStationComponent implements OnInit {
     return this.list.slice(1, this.list.length);
   }
 
+  public isNan(item) {
+    return !isNaN(parseFloat(this.avg(item))) && !isNaN(parseFloat(this.max(item))) && !isNaN(parseFloat(this.min(item)));
+  }
+
   public avg(item) {
-    let som = 0;
+    let sum = 0;
     for (let x of this.getBody()) {
-      som += parseFloat(x[item]) || 0;
+      sum += parseFloat(x[item]) || 0;
     }
-    return (som / (this.getBody().length - 1)).toFixed(2);
+    return (sum / (this.getBody().length - 1)).toFixed(2);
   }
 
   public min(item) {
@@ -70,6 +90,24 @@ export class ViewStationComponent implements OnInit {
     return larger.toFixed(2);
   }
 
+  public getDates() {
+    return Object.keys(this.mapDates).filter((key) => {
+      return key !== "" && key !== "undefined";
+    });
+  }
+
+  public mapDatesIsNotNull() {
+    return this.mapDates !== null;
+  }
+
+
+  public updateSelect(event) {
+    console.log(event);
+  }
+
+  hello(self) {
+    console.log(self);
+  }
   ngOnInit() { }
 
 }

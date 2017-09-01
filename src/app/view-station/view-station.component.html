@@ -42,16 +42,35 @@
 
                 </thead>
                 <tbody>
+                    <!-- <tr *ngFor="let item of getHead()" *ngIf="isNan(item)"> -->
                     <tr *ngFor="let item of getHead()">
                         <th>{{item}}</th>
                         <td>{{avg(item)}}</td>
                         <td>{{max(item)}}</td>
                         <td>{{min(item)}}</td>
-                    </tr>   
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<app-graphics></app-graphics>  
+<div class="row header text-center" *ngIf="mapDatesIsNotNull()">
+    <div class="col-md-12">
+        <h3>
+            Selecione o dia que desejar visualizar
+        </h3>
+        <select class="form-control form-control-md" [(ngModel)] = "select" (ngModelChange)= "updateSelect($event)">
+            <option selected>Selecione o dia</option>
+            <option *ngFor="let date of getDates()" [ngValue]="date">{{date}}</option>
+        </select>
+<!-- 
+        <select class="form-control" name="sel" [(ngModel)]="selectedWorkout" (ngModelChange)="updateWorkout($event)">
+            <option *ngFor="let workout of workouts" [ngValue]="workout">
+                {{workout.name}}
+            </option>
+        </select> -->
+    </div>
+</div>
+
+<app-graphics></app-graphics>

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './graphics.component.html'
 })
 export class GraphicsComponent implements OnInit {
-
+  // @Input() listChats;
   listCharts = [
     {
       title: "temp_inst", data: [
