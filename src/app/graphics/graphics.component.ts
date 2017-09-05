@@ -6,100 +6,129 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class GraphicsComponent implements OnInit {
   @Input() datas;
-
-  listCharts = [
-    {
-      title: "temp_inst", data: [
-
-        {
-          "column-1": 27.8,
-          "date": "01/06/16 11"
-        },
-        {
-          "column-1": 29.6,
-          "date": "01/06/16 12"
-        }
-        ,
-        {
-          "column-1": 30.4,
-          "date": "01/06/16 13"
-        },
-        {
-          "column-1": 31.2,
-          "date": "01/06/16 14"
-        },
-        {
-          "column-1": 31.2,
-          "date": "01/06/16 15"
-        },
-        {
-          "column-1": 31.2,
-          "date": "01/06/16 16"
-        },
-        {
-          "column-1": 30.6,
-          "date": "01/06/16 17"
-        },
-        {
-          "column-1": 30.6,
-          "date": "01/06/16 18"
-        },
-        {
-          "column-1": 29.8,
-          "date": "01/06/16 19"
-        }
-
-      ]
-    },
-
-    {
-      title: "temp_inst2", data: [
-
-        {
-          "column-1": 27.8,
-          "date": "01/06/16 11"
-        },
-        {
-          "column-1": 29.6,
-          "date": "01/06/16 12"
-        }
-        ,
-        {
-          "column-1": 30.4,
-          "date": "01/06/16 13"
-        },
-        {
-          "column-1": 31.2,
-          "date": "01/06/16 14"
-        },
-        {
-          "column-1": 31.2,
-          "date": "01/06/16 15"
-        },
-        {
-          "column-1": 31.2,
-          "date": "01/06/16 16"
-        },
-        {
-          "column-1": 30.6,
-          "date": "01/06/16 17"
-        },
-        {
-          "column-1": 30.6,
-          "date": "01/06/16 18"
-        },
-        {
-          "column-1": 29.8,
-          "date": "01/06/16 19"
-        }
-
-      ]
-    }
-  ]
-
-  constructor() { }
+  listCharts;
+  
+  constructor() {}
 
   ngOnInit() {
+    
+    let head = Object.keys(this.datas[0]).filter(function (title) {
+      return title != "codigo_estacao" && title != "data" && title != "_id" && title != "" && title != "hora";
+    });
+
+    this.listCharts = [];
+
+    for (let title of head) {
+      let obj = {};
+      obj['title'] = title;
+      obj['data'] = [];
+
+      for (let data of this.datas) {
+        obj['data'].push({
+          "column-1": parseFloat(data[title]),
+          "date": data.hora
+        });
+      }
+
+      obj['data'].sort( function(obj1, obj2) {
+        return parseFloat(obj1.date) - parseFloat(obj2.date)
+      });
+
+      this.listCharts.push(obj);
+    }
+
+    console.log(this.listCharts)
   }
+
+  // listCharts = [
+  //   {
+  //     title: "temp_inst", data: [
+
+  //       {
+  //         "column-1": 27.8,
+  //         "date": "11"
+  //       },
+  //       {
+  //         "column-1": 29.6,
+  //         "date": "12"
+  //       }
+  //       ,
+  //       {
+  //         "column-1": 30.4,
+  //         "date": "13"
+  //       },
+  //       {
+  //         "column-1": 31.2,
+  //         "date": "14"
+  //       },
+  //       {
+  //         "column-1": 31.2,
+  //         "date": "15"
+  //       },
+  //       {
+  //         "column-1": 31.2,
+  //         "date": "16"
+  //       },
+  //       {
+  //         "column-1": 30.6,
+  //         "date": "17"
+  //       },
+  //       {
+  //         "column-1": 30.6,
+  //         "date": "18"
+  //       },
+  //       {
+  //         "column-1": 29.8,
+  //         "date": "19"
+  //       }
+
+  //     ]
+  //   },
+
+  //   {
+  //     title: "temp_inst2", data: [
+
+  //       {
+  //         "column-1": 27.8,
+  //         "date": "11"
+  //       },
+  //       {
+  //         "column-1": 29.6,
+  //         "date": "12"
+  //       }
+  //       ,
+  //       {
+  //         "column-1": 30.4,
+  //         "date": "13"
+  //       },
+  //       {
+  //         "column-1": 31.2,
+  //         "date": "14"
+  //       },
+  //       {
+  //         "column-1": 31.2,
+  //         "date": "15"
+  //       },
+  //       {
+  //         "column-1": 31.2,
+  //         "date": "16"
+  //       },
+  //       {
+  //         "column-1": 30.6,
+  //         "date": "17"
+  //       },
+  //       {
+  //         "column-1": 30.6,
+  //         "date": "18"
+  //       },
+  //       {
+  //         "column-1": 29.8,
+  //         "date": "19"
+  //       }
+
+  //     ]
+  //   }
+  // ]
+
 
 }

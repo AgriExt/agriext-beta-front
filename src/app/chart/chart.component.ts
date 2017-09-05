@@ -15,7 +15,7 @@ export class ChartComponent implements OnInit {
     this.chart = this.AmCharts.makeChart(this.dataChart.title, {
       "type": "serial",
       "categoryField": "date",
-      "dataDateFormat": "DD/MM/YY HH",
+      "dataDateFormat": "HH",
       // "dataDateFormat": "YYYY-MM-DD HH",
       "theme": "light",
       "categoryAxis": {
