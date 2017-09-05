@@ -1,0 +1,7 @@
+div {
+    /* width: 50%; */
+    height: 300px;
+    min-width: 310px;
+    max-width: 800px;
+    /* float: left; */
+}

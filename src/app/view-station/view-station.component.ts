@@ -101,7 +101,6 @@ export class ViewStationComponent implements OnInit {
 
   public filter(event) {
     this.filterDate = this.mapDates[event];
-    console.log(this.mapDates[event]);
   }
 
   ngOnInit() { }

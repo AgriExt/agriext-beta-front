@@ -3,7 +3,9 @@ import { AmChartsService, AmChart } from "@amcharts/amcharts3-angular";
 
 @Component({
   selector: 'app-chart',
-  templateUrl: './chart.component.html'
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.css']
+  
 })
 export class ChartComponent implements OnInit {
   @Input() dataChart: any;
@@ -15,7 +17,7 @@ export class ChartComponent implements OnInit {
     this.chart = this.AmCharts.makeChart(this.dataChart.title, {
       "type": "serial",
       "categoryField": "date",
-      "dataDateFormat": "HH",
+      "dataDateFormat": "DD-MM-YYYY HH",
       // "dataDateFormat": "YYYY-MM-DD HH",
       "theme": "light",
       "categoryAxis": {

@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class GraphicsComponent implements OnInit {
   @Input() datas;
   listCharts;
-  
+
   constructor() {}
 
   ngOnInit() {
@@ -26,18 +26,17 @@ export class GraphicsComponent implements OnInit {
       for (let data of this.datas) {
         obj['data'].push({
           "column-1": parseFloat(data[title]),
-          "date": data.hora
+          "date": data.data +" "+data.hora
         });
       }
 
       obj['data'].sort( function(obj1, obj2) {
-        return parseFloat(obj1.date) - parseFloat(obj2.date)
+        return parseFloat(obj1.date.split(' ')[1]) - parseFloat(obj2.date.split(' ')[1])
       });
 
       this.listCharts.push(obj);
     }
 
-    console.log(this.listCharts)
   }
 
   // listCharts = [
