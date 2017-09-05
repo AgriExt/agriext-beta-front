@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-graphics',
   templateUrl: './graphics.component.html'
 })
 export class GraphicsComponent implements OnInit {
-  // @Input() listChats;
+  @Input() datas;
+
   listCharts = [
     {
       title: "temp_inst", data: [
@@ -52,8 +53,7 @@ export class GraphicsComponent implements OnInit {
     },
 
     {
-      title: "temp_max",
-      data: [
+      title: "temp_inst2", data: [
 
         {
           "column-1": 27.8,

@@ -60,7 +60,7 @@
         <h3>
             Selecione o dia que desejar visualizar
         </h3>
-        <select class="form-control form-control-md" [(ngModel)] = "select" (ngModelChange)= "updateSelect($event)">
+        <select class="form-control form-control-md" [(ngModel)] = "select" (ngModelChange)= "filter($event)">
             <option selected>Selecione o dia</option>
             <option *ngFor="let date of getDates()" [ngValue]="date">{{date}}</option>
         </select>
@@ -73,4 +73,4 @@
     </div>
 </div>
 
-<app-graphics></app-graphics>
+<app-graphics *ngIf="filterDate" [datas]="filterDate"></app-graphics>

@@ -14,8 +14,7 @@ export class ViewStationComponent implements OnInit {
   private uploadFile: UploadFile;
   private list: any;
   private mapDates: any;
-
-  select;
+  filterDate  = null;
 
   constructor() {
     this.uploadFile = new UploadFile();
@@ -42,7 +41,6 @@ export class ViewStationComponent implements OnInit {
               self.mapDates[obj.data].push(obj);
             }
           }
-          console.log(self.mapDates)
         }
       }
     ]);
@@ -101,13 +99,11 @@ export class ViewStationComponent implements OnInit {
   }
 
 
-  public updateSelect(event) {
-    console.log(event);
+  public filter(event) {
+    this.filterDate = this.mapDates[event];
+    console.log(this.mapDates[event]);
   }
 
-  hello(self) {
-    console.log(self);
-  }
   ngOnInit() { }
 
 }
