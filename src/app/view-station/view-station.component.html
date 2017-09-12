@@ -12,18 +12,18 @@
         <p>ou</p>
         <div class="text-center">
             <h4>Carregue o seu CSV</h4>
-            <div class="input-group">
-                <label class="input-group-btn">
-            <span class="btn btn-info">
-                Browse&hellip; <input type="file" style="display: none;" multiple (change)="upload($event.target)">
-            </span>
-        </label>
-                <input type="text" class="form-control" readonly>
-            </div>
-            <span class="help-block">
-        Selecione o seu dataset para visualizar.
-    </span>
         </div>
+        <div class="input-group">
+          <label class="input-group-btn">
+            <span class="btn btn-info">
+              Browse&hellip; <input type="file" style="display: none;" multiple (change)="upload($event.target)">
+            </span>
+          </label>
+          <input type="text" class="form-control" readonly>
+        </div>
+        <span class="help-block">
+  Selecione o seu dataset para visualizar.
+</span>
         <button type="button" class="btn btn-info btn-md btn-block">RODAR</button>
     </div>
 
@@ -64,7 +64,7 @@
             <option selected>Selecione o dia</option>
             <option *ngFor="let date of getDates()" [ngValue]="date">{{date}}</option>
         </select>
-<!-- 
+<!--
         <select class="form-control" name="sel" [(ngModel)]="selectedWorkout" (ngModelChange)="updateWorkout($event)">
             <option *ngFor="let workout of workouts" [ngValue]="workout">
                 {{workout.name}}
