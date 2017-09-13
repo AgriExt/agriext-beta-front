@@ -18,17 +18,33 @@ export class ViewStationComponent implements OnInit {
 
   constructor() {
     this.uploadFile = new UploadFile();
-    this.list;
+    this.list = null;
     this.mapDates = null;
+
+    if (sessionStorage.getItem('csv')) {
+      this.list = csvToJson(sessionStorage.getItem('csv'));
+      this.mapDates = {};
+      for (let obj of this.getBody()) {
+        if (!this.mapDates[obj.data]) {
+          this.mapDates[obj.data] = [];
+          this.mapDates[obj.data].push(obj);
+        }
+        else {
+          this.mapDates[obj.data].push(obj);
+        }
+      }
+    }
   }
 
 
   public upload(fileInput) {
     let self = this;
+    // console.log(fileInput.files[0]);
     self.uploadFile.read(fileInput.files[0], [
       {
         event: "loadend",
         callback: function () {
+          sessionStorage.setItem('csv', this.result);
           self.list = csvToJson(this.result);
           self.mapDates = {};
 
@@ -41,6 +57,7 @@ export class ViewStationComponent implements OnInit {
               self.mapDates[obj.data].push(obj);
             }
           }
+
         }
       }
     ]);

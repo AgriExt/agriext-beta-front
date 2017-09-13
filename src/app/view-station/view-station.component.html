@@ -12,18 +12,18 @@
         <p>ou</p>
         <div class="text-center">
             <h4>Carregue o seu CSV</h4>
-            <div class="input-group">
-                <label class="input-group-btn">
-            <span class="btn btn-info">
-                Browse&hellip; <input type="file" style="display: none;" multiple (change)="upload($event.target)">
-            </span>
-        </label>
-                <input type="text" class="form-control" readonly>
-            </div>
-            <span class="help-block">
-        Selecione o seu dataset para visualizar.
-    </span>
         </div>
+        <div class="input-group">
+          <label class="input-group-btn">
+            <span class="btn btn-info">
+              Browse&hellip; <input type="file" style="display: none;" multiple (change)="upload($event.target)">
+            </span>
+          </label>
+          <input type="text" class="form-control" readonly>
+        </div>
+        <span class="help-block">
+  Selecione o seu dataset para visualizar.
+</span>
         <button type="button" class="btn btn-info btn-md btn-block">RODAR</button>
     </div>
 
@@ -37,7 +37,6 @@
                         <th>AVG</th>
                         <th>MAX</th>
                         <th>MIN</th>
-
                     </tr>
 
                 </thead>
