@@ -11,7 +11,7 @@ export class GraphicsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    
+        
     let head = Object.keys(this.datas[0]).filter(function (title) {
       return title != "codigo_estacao" && title != "data" && title != "_id" && title != "" && title != "hora";
     });

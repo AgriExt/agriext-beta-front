@@ -42,7 +42,6 @@
 
                 </thead>
                 <tbody>
-                    <!-- <tr *ngFor="let item of getHead()" *ngIf="isNan(item)"> -->
                     <tr *ngFor="let item of getHead()">
                         <th>{{item}}</th>
                         <td>{{avg(item)}}</td>
@@ -60,11 +59,11 @@
         <h3>
             Selecione o dia que desejar visualizar
         </h3>
-        <select class="form-control form-control-md" [(ngModel)] = "select" (ngModelChange)= "filter($event)">
-            <option selected>Selecione o dia</option>
+        <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="filter($event)">
+            <option selected>Selecione o dia</option>    
             <option *ngFor="let date of getDates()" [ngValue]="date">{{date}}</option>
         </select>
-<!-- 
+        <!-- 
         <select class="form-control" name="sel" [(ngModel)]="selectedWorkout" (ngModelChange)="updateWorkout($event)">
             <option *ngFor="let workout of workouts" [ngValue]="workout">
                 {{workout.name}}
@@ -73,4 +72,6 @@
     </div>
 </div>
 
-<app-graphics *ngIf="filterDate" [datas]="filterDate"></app-graphics>
+<div *ngIf="filterDate">
+    <app-graphics [datas]="filterDate"></app-graphics>
+</div>

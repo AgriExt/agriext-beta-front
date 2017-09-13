@@ -14,7 +14,7 @@ export class ViewStationComponent implements OnInit {
   private uploadFile: UploadFile;
   private list: any;
   private mapDates: any;
-  filterDate  = null;
+  filterDate = null;
 
   constructor() {
     this.uploadFile = new UploadFile();
