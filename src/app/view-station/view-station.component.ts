@@ -39,7 +39,6 @@ export class ViewStationComponent implements OnInit {
 
   public upload(fileInput) {
     let self = this;
-    // console.log(fileInput.files[0]);
     self.uploadFile.read(fileInput.files[0], [
       {
         event: "loadend",
