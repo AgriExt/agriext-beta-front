@@ -4,368 +4,50 @@
 
 <div class="container">
 
-  <div class="row ">
-      <!-- Small button group-->
-      <div class="col-md-4 col-md-offset-1 text-center jumbotron">
-          <h4>Algoritmos de classificação</h4>
-  <select class="form-control form-control-md">
+    <div class="row ">
+        <!-- Small button group-->
+        <div class="col-md-4 col-md-offset-1 text-center jumbotron">
+            <h4>Algoritmos de classificação</h4>
+            <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="gerar($event)">
               <option selected>Selecione o algoritmo</option>
-              <option value="">Regressão Linear</option>
-              <option value="">M5P</option>
+              <option [ngValue] = "1">Regressão Linear</option>
+              <option [ngValue] = "0">M5P</option>
           </select>
-          <br>
-          <div class="input-group input-group-md">
-              <span class="input-group-addon" id="sizing-addon1">CLASS</span>
-              <fieldset disabled>
-                  <input type="text" class="form-control" placeholder="ET0" aria-describedby="sizing-addon1">
-              </fieldset>
-          </div>
-          <br>
-          <button type="button" class="btn btn-info btn-md btn-block">EXECUTAR</button>
-      </div>
+            <br>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon" id="sizing-addon1">CLASS</span>
+                <fieldset disabled>
+                    <input type="text" class="form-control" placeholder="ET0" aria-describedby="sizing-addon1">
+                </fieldset>
+            </div>
+            <br>
+            <button type="button" class="btn btn-info btn-md btn-block">EXECUTAR</button>
+        </div>
 
-      <div class="col-md-6 col-md-offset-1 text-center jumbotron">
-          <div class="text-center">
-              <h4>Resultado</h4>
-              <fieldset disabled>
-                  <div class="form-group row">
-                      <label for="example-text-input" class="col-md-2 col-form-label">AVALIAÇÃO DO MODELO</label>
-                      <div class="col-md-10">
-                          <textarea class="form-control" id="exampleTextarea" rows="5">
-Correlation coefficient                  0.9966
-Mean absolute error                      0.0028
-Root mean squared error                  0.0046
-Relative absolute error                  5.7702 %
-Root relative squared error              8.3017 %
-Total Number of Instances              336     </textarea>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="example-text-input" class="col-md-2 col-form-label">MODELO</label>
-                      <div class="col-md-10">
-                          <textarea class="form-control" id="exampleTextarea" rows="5">=== Run information ===
+        <div class="col-md-6 col-md-offset-1 text-center jumbotron">
+            <div class="text-center">
+                <h4>Resultado</h4>
+                <fieldset disabled>
+                    <div class="form-group row" *ngIf="avaliacao">
+                        <label for="example-text-input" class="col-md-2 col-form-label">AVALIAÇÃO DO MODELO</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" id="exampleTextarea" rows="5">
+                               {{avaliacao}} 
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row" *ngIf="modelo">
+                        <label for="example-text-input" class="col-md-2 col-form-label">MODELO</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" id="exampleTextarea" rows="5">
+                                {{modelo}}
+                            </textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="button" class="btn btn-info btn-md">EXPORTAR (.model)</button>
+            </div>
 
-Scheme:weka.classifiers.trees.M5P -M 4.0
-Relation:     2016total-semoutlier2-weka.filters.unsupervised.attribute.Remove-R1,10-11,15
-Instances:    1120
-Attributes:   12
-        pressao_atm_max
-        pressao_atm_min
-        chuva_mm
-        temp_ar_max
-        temp_ar_min
-        umid_relat_max
-        umid_relat_min
-        rad_solar_total
-        temp_ar_media
-        umid_relat_media
-        vento_veloc
-        et0
-Test mode:split 70.0% train, remainder test
-
-=== Classifier model (full training set) ===
-
-M5 pruned model tree:
-(using smoothed linear models)
-
-umid_relat_min <= 62.089 : 
-|   rad_solar_total <= 2203.805 : 
-|   |   temp_ar_media <= 29.416 : LM1 (74/3.859%)
-|   |   temp_ar_media >  29.416 : 
-|   |   |   vento_veloc <= 0.822 : LM2 (35/9.188%)
-|   |   |   vento_veloc >  0.822 : 
-|   |   |   |   vento_veloc <= 1.433 : 
-|   |   |   |   |   temp_ar_media <= 32.715 : 
-|   |   |   |   |   |   umid_relat_media <= 43.671 : LM3 (10/3.471%)
-|   |   |   |   |   |   umid_relat_media >  43.671 : LM4 (4/2.357%)
-|   |   |   |   |   temp_ar_media >  32.715 : LM5 (29/3.913%)
-|   |   |   |   vento_veloc >  1.433 : 
-|   |   |   |   |   temp_ar_min <= 30.455 : LM6 (25/1.918%)
-|   |   |   |   |   temp_ar_min >  30.455 : LM7 (25/7.658%)
-|   rad_solar_total >  2203.805 : 
-|   |   umid_relat_max <= 52.302 : 
-|   |   |   vento_veloc <= 1.92 : 
-|   |   |   |   vento_veloc <= 1.585 : LM8 (63/2.061%)
-|   |   |   |   vento_veloc >  1.585 : LM9 (78/1.965%)
-|   |   |   vento_veloc >  1.92 : LM10 (165/4.029%)
-|   |   umid_relat_max >  52.302 : 
-|   |   |   vento_veloc <= 1.931 : LM11 (54/4.205%)
-|   |   |   vento_veloc >  1.931 : 
-|   |   |   |   umid_relat_max <= 64.068 : LM12 (56/3.077%)
-|   |   |   |   umid_relat_max >  64.068 : LM13 (20/7.688%)
-umid_relat_min >  62.089 : 
-|   temp_ar_max <= 25.109 : 
-|   |   vento_veloc <= 0.44 : LM14 (76/3.804%)
-|   |   vento_veloc >  0.44 : 
-|   |   |   vento_veloc <= 1.571 : LM15 (149/3.46%)
-|   |   |   vento_veloc >  1.571 : LM16 (109/4.107%)
-|   temp_ar_max >  25.109 : 
-|   |   vento_veloc <= 1.754 : LM17 (60/5.452%)
-|   |   vento_veloc >  1.754 : 
-|   |   |   rad_solar_total <= 2501.705 : LM18 (60/6.055%)
-|   |   |   rad_solar_total >  2501.705 : LM19 (28/1.509%)
-
-LM num: 1
-et0 = 
-0 * pressao_atm_max 
-+ 0.0017 * temp_ar_max 
-+ 0.0001 * temp_ar_min 
-- 0.0003 * umid_relat_max 
-+ 0.0002 * umid_relat_min 
-- 0 * temp_ar_media 
-- 0.0014 * umid_relat_media 
-+ 0.0284 * vento_veloc 
-+ 0.0171
-
-LM num: 2
-et0 = 
-0.0001 * pressao_atm_max 
-+ 0.0002 * temp_ar_max 
-+ 0.0036 * temp_ar_min 
-+ 0.0004 * umid_relat_max 
-+ 0.0002 * umid_relat_min 
-+ 0 * rad_solar_total 
-- 0.0014 * temp_ar_media 
-- 0.0014 * umid_relat_media 
-+ 0.0598 * vento_veloc 
-- 0.1427
-
-LM num: 3
-et0 = 
--0.0001 * pressao_atm_max 
-+ 0.0002 * temp_ar_max 
-+ 0.0008 * temp_ar_min 
-+ 0 * umid_relat_max 
-+ 0.0002 * umid_relat_min 
-+ 0.0034 * temp_ar_media 
-- 0.0015 * umid_relat_media 
-+ 0.0522 * vento_veloc 
-- 0.0411
-
-LM num: 4
-et0 = 
-0 * pressao_atm_max 
-- 0.0043 * pressao_atm_min 
-+ 0.0002 * temp_ar_max 
-+ 0.0008 * temp_ar_min 
-+ 0 * umid_relat_max 
-+ 0.0002 * umid_relat_min 
-+ 0.0034 * temp_ar_media 
-- 0.0015 * umid_relat_media 
-+ 0.0512 * vento_veloc 
-+ 2.5264
-
-LM num: 5
-et0 = 
-0.0001 * pressao_atm_max 
-+ 0.0002 * temp_ar_max 
-+ 0.0016 * temp_ar_min 
-- 0 * umid_relat_max 
-- 0.0002 * umid_relat_min 
-+ 0.0025 * temp_ar_media 
-- 0.0013 * umid_relat_media 
-+ 0.0631 * vento_veloc 
-- 0.1272
-
-LM num: 6
-et0 = 
-0.0001 * pressao_atm_max 
-+ 0.0014 * temp_ar_max 
-+ 0.0029 * temp_ar_min 
-+ 0.0002 * umid_relat_max 
-+ 0.0002 * umid_relat_min 
-+ 0.0012 * temp_ar_media 
-- 0.0024 * umid_relat_media 
-+ 0.0453 * vento_veloc 
-- 0.1124
-
-LM num: 7
-et0 = 
-0 * pressao_atm_max 
-- 0.0016 * temp_ar_max 
-+ 0.0029 * temp_ar_min 
-+ 0.0002 * umid_relat_max 
-+ 0.0002 * umid_relat_min 
-+ 0.0064 * temp_ar_media 
-- 0.0018 * umid_relat_media 
-+ 0.0555 * vento_veloc 
-- 0.1974
-
-LM num: 8
-et0 = 
-0 * pressao_atm_max 
-+ 0.0012 * pressao_atm_min 
-+ 0.0004 * temp_ar_max 
-- 0.0004 * temp_ar_min 
-- 0.0003 * umid_relat_max 
-- 0.0008 * umid_relat_min 
-+ 0 * rad_solar_total 
-+ 0.0019 * temp_ar_media 
-- 0.0006 * umid_relat_media 
-+ 0.0684 * vento_veloc 
-- 0.7164
-
-LM num: 9
-et0 = 
-0 * pressao_atm_max 
-+ 0.0011 * pressao_atm_min 
-+ 0.0004 * temp_ar_max 
-- 0.0003 * temp_ar_min 
-+ 0.0005 * umid_relat_max 
-- 0 * umid_relat_min 
-+ 0 * rad_solar_total 
-+ 0.0018 * temp_ar_media 
-- 0.0025 * umid_relat_media 
-+ 0.0661 * vento_veloc 
-- 0.6235
-
-LM num: 10
-et0 = 
-0 * pressao_atm_max 
-+ 0.0004 * pressao_atm_min 
-+ 0.0004 * temp_ar_max 
-- 0.0003 * temp_ar_min 
-- 0 * umid_relat_max 
-+ 0.0001 * umid_relat_min 
-+ 0 * rad_solar_total 
-+ 0.0028 * temp_ar_media 
-- 0.0024 * umid_relat_media 
-+ 0.0598 * vento_veloc 
-- 0.2249
-
-LM num: 11
-et0 = 
--0.0002 * pressao_atm_max 
-+ 0.0026 * temp_ar_max 
-- 0.0015 * temp_ar_min 
-- 0.0007 * umid_relat_max 
-+ 0.0001 * umid_relat_min 
-- 0 * rad_solar_total 
-+ 0.0001 * temp_ar_media 
-- 0.0013 * umid_relat_media 
-+ 0.0423 * vento_veloc 
-+ 0.2118
-
-LM num: 12
-et0 = 
-0 * pressao_atm_max 
-- 0.0024 * pressao_atm_min 
-+ 0.0032 * temp_ar_max 
-- 0.0015 * temp_ar_min 
-- 0.0002 * umid_relat_max 
-+ 0.0002 * umid_relat_min 
-- 0 * rad_solar_total 
-+ 0.0001 * temp_ar_media 
-- 0.0023 * umid_relat_media 
-+ 0.041 * vento_veloc 
-+ 1.5175
-
-LM num: 13
-et0 = 
-0 * pressao_atm_max 
-- 0.0277 * pressao_atm_min 
-+ 0.0024 * temp_ar_max 
-- 0.0017 * temp_ar_min 
-- 0.0002 * umid_relat_max 
-- 0.0004 * umid_relat_min 
-+ 0 * rad_solar_total 
-+ 0.0001 * temp_ar_media 
-- 0.0014 * umid_relat_media 
-+ 0.0347 * vento_veloc 
-+ 16.699
-
-LM num: 14
-et0 = 
-0 * pressao_atm_max 
-+ 0.0006 * temp_ar_max 
-- 0.0002 * temp_ar_min 
-- 0.0001 * umid_relat_max 
-- 0 * umid_relat_min 
-+ 0 * rad_solar_total 
-- 0.0002 * temp_ar_media 
-- 0.0001 * umid_relat_media 
-+ 0.0032 * vento_veloc 
-+ 0.0156
-
-LM num: 15
-et0 = 
-0 * pressao_atm_max 
-+ 0.0006 * temp_ar_max 
-- 0.0002 * temp_ar_min 
-- 0 * umid_relat_max 
-- 0.0005 * umid_relat_min 
-+ 0 * rad_solar_total 
-- 0.0002 * temp_ar_media 
-- 0.0001 * umid_relat_media 
-+ 0.012 * vento_veloc 
-+ 0.0626
-
-LM num: 16
-et0 = 
-0 * pressao_atm_max 
-+ 0.0006 * temp_ar_max 
-- 0.0002 * temp_ar_min 
-- 0 * umid_relat_max 
-- 0.0006 * umid_relat_min 
-+ 0 * rad_solar_total 
-- 0.0002 * temp_ar_media 
-- 0.0005 * umid_relat_media 
-+ 0.0111 * vento_veloc 
-+ 0.0815
-
-LM num: 17
-et0 = 
-0 * pressao_atm_max 
-+ 0.002 * temp_ar_max 
-+ 0.0007 * temp_ar_min 
-+ 0.0002 * umid_relat_max 
-- 0.0007 * umid_relat_min 
-+ 0 * rad_solar_total 
-- 0.0007 * temp_ar_media 
-- 0.0005 * umid_relat_media 
-+ 0.016 * vento_veloc 
-+ 0.0473
-
-LM num: 18
-et0 = 
--0.0001 * pressao_atm_max 
-+ 0.0017 * temp_ar_max 
-+ 0.0005 * temp_ar_min 
-- 0.0006 * umid_relat_max 
-- 0.0002 * umid_relat_min 
-+ 0 * rad_solar_total 
-- 0.0019 * temp_ar_media 
-- 0.0007 * umid_relat_media 
-+ 0.0141 * vento_veloc 
-+ 0.1475
-
-LM num: 19
-et0 = 
--0.0001 * pressao_atm_max 
-- 0.0029 * pressao_atm_min 
-+ 0.0017 * temp_ar_max 
-+ 0.0011 * temp_ar_min 
-+ 0.0001 * umid_relat_max 
-+ 0.0002 * umid_relat_min 
-+ 0 * rad_solar_total 
-- 0.0019 * temp_ar_media 
-- 0.002 * umid_relat_media 
-+ 0.0189 * vento_veloc 
-+ 1.9022
-
-Number of Rules : 19
-
-Time taken to build model: 0.7 seconds
-
-=== Evaluation on test split ===
-=== Summary ===
-</textarea>
-                      </div>
-                  </div>
-              </fieldset>
-              <button type="button" class="btn btn-info btn-md">EXPORTAR (.model)</button>
-          </div>
-
-      </div>
-  </div>
-</div>  
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { RestStationService } from './../rest-station.service';
+// import { RestStationService } from './../rest-station.service';
 import { Component, OnInit } from '@angular/core';
 
 import { UploadFile } from './../../util/UploadFile';
@@ -21,8 +21,8 @@ export class ViewStationComponent implements OnInit {
     this.list = null;
     this.mapDates = null;
 
-    if (sessionStorage.getItem('csv')) {
-      this.list = csvToJson(sessionStorage.getItem('csv'));
+    if (sessionStorage.getItem('csv-body')) {
+      this.list = csvToJson(sessionStorage.getItem('csv-body'));
       this.mapDates = {};
       for (let obj of this.getBody()) {
         if (!this.mapDates[obj.data]) {
@@ -43,7 +43,9 @@ export class ViewStationComponent implements OnInit {
       {
         event: "loadend",
         callback: function () {
-          sessionStorage.setItem('csv', this.result);
+          // console.log(fileInput.files[0]);
+          sessionStorage.setItem('csv-body', this.result);
+          sessionStorage.setItem('csv-name', fileInput.files[0].name);
           self.list = csvToJson(this.result);
           self.mapDates = {};
 
