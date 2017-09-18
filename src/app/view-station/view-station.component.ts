@@ -17,6 +17,7 @@ export class ViewStationComponent implements OnInit {
   filterDate = null;
 
   constructor() {
+
     this.uploadFile = new UploadFile();
     this.list = null;
     this.mapDates = null;
@@ -34,6 +35,7 @@ export class ViewStationComponent implements OnInit {
         }
       }
     }
+
   }
 
 

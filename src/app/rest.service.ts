@@ -7,7 +7,7 @@ export class RestService {
 
   DataSet: any[] = [];
 
-  private baseURL = 'http://200.129.38.174:8181/data';
+  private url = 'http://172.18.102.253:8181/data/';
   private paths = {
     uploadFile: '/uploadFile'
   };
@@ -27,9 +27,16 @@ export class RestService {
     let formData = new FormData();
     formData.append('file', file, file.name);
 
-    return this.http.post('http://200.129.38.174:8181/data/uploadFile/' + type, formData)
+    // let headers = new Headers();
+    // headers.append('Enctype', 'multipart/form-data');
+    // headers.append('Accept', 'multipart/form-data');
+    // headers.append('Content-Type' , 'multipart/form-data');
+    // headers.append('Access-Control-Allow-Headers', '*');
+    // headers.append('Access-Control-Allow-Methods', '*');
+    // headers.append('Access-Control-Allow-Origin', '*');
+
+    return this.http.post(this.url + type, formData)
       .map((response: Response) => {
-        // console.log(response.text());
         return response.text();
       })
       .catch((error: Response) => Observable.throw(error));
