@@ -7,9 +7,9 @@ export class RestService {
 
   DataSet: any[] = [];
 
-  private url = 'http://172.18.102.253:8181/data/';
+  private url = 'http://localhost:8080/data/';
   private paths = {
-    uploadFile: '/uploadFile'
+    uploadFile: '/uploadFile/'
   };
 
   constructor(private http: Http) { }
@@ -34,8 +34,7 @@ export class RestService {
     // headers.append('Access-Control-Allow-Headers', '*');
     // headers.append('Access-Control-Allow-Methods', '*');
     // headers.append('Access-Control-Allow-Origin', '*');
-
-    return this.http.post(this.url + type, formData)
+    return this.http.post(this.url + this.paths.uploadFile + type, formData)
       .map((response: Response) => {
         return response.text();
       })
