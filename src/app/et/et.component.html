@@ -1,3 +1,70 @@
-<p>
-  et works!
-</p>
+<div class="container">
+  <div class="row ">
+    <!-- Small button group-->
+    <div class="col-md-4 col-md-offset-1 text-center jumbotron">
+        <h4>Escolha o modelo</h4>
+
+        <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="gerarEt($event)">
+          <option select>Selecione o modelo</option>
+          <option [ngValue] = "1">Método de Jensen-Hayse</option>
+          <option [ngValue] = "0">QuixadáHC</option>
+        </select>
+        <br>
+        <p>ou</p>
+        <div class="input-group">
+            <label class="input-group-btn">
+            <span class="btn btn-info">
+                Buscar&hellip; <input type="file" style="display: none;" multiple>
+            </span>
+        </label>
+            <input type="text" class="form-control" readonly>
+        </div>
+        <span class="help-block">
+        Carregue o seu modelo (.model).
+    </span>
+    <div class="input-group input-group-md">
+            <span class="input-group-addon" id="sizing-addon1">KC</span>
+            <input type="text" class="form-control" placeholder="Adicione o Kc" aria-describedby="sizing-addon1">
+        </div>
+    </div>
+
+    <div class="col-md-6 col-md-offset-1 text-center jumbotron">
+        <h4>Resultado</h4>
+        <div class="text-center">
+            <br>
+            <div class="tdados">
+                <table class="table table-bordered table-hover table-md ">
+                    <thead>
+                        <tr>
+                            <th>ET0</th>
+                            <th>Kc * ET0</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0.2591522</td>
+                            <td>0.1814066</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="input-group input-group-md">
+            <span class="input-group-addon" id="sizing-addon1">
+                ÁGUA(mm/dia) EVAPOTRANSPIRADA</span>
+            <fieldset disabled>
+                <input type="text" class="form-control" placeholder="3.93021" aria-describedby="sizing-addon1">
+            </fieldset>
+        </div>
+        <div class="input-group input-group-md">
+            <span class="input-group-addon" id="sizing-addon1">
+                ÁGUA(mm/dia) PARA A IRRIGAÇÃO
+            </span>
+            <fieldset disabled>
+                <input type="text" class="form-control" placeholder="5.614585" aria-describedby="sizing-addon1">
+            </fieldset>
+        </div>
+    </div>
+  </div>
+</div>

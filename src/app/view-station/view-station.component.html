@@ -24,7 +24,6 @@
         <span class="help-block">
   Selecione o seu dataset para visualizar.
 </span>
-        <button type="button" class="btn btn-info btn-md btn-block">RODAR</button>
     </div>
 
     <div class="col-md-7 col-md-offset-1 text-center">
@@ -59,10 +58,10 @@
             Selecione o dia que desejar visualizar
         </h3>
         <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="filter($event)">
-            <option selected>Selecione o dia</option>    
+            <option selected>Selecione o dia</option>
             <option *ngFor="let date of getDates()" [ngValue]="date">{{date}}</option>
         </select>
-        <!-- 
+        <!--
         <select class="form-control" name="sel" [(ngModel)]="selectedWorkout" (ngModelChange)="updateWorkout($event)">
             <option *ngFor="let workout of workouts" [ngValue]="workout">
                 {{workout.name}}

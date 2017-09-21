@@ -26,14 +26,6 @@ export class RestService {
     let file = new File([csv_body], csv_name, { type: 'text/csv' });
     let formData = new FormData();
     formData.append('file', file, file.name);
-
-    // let headers = new Headers();
-    // headers.append('Enctype', 'multipart/form-data');
-    // headers.append('Accept', 'multipart/form-data');
-    // headers.append('Content-Type' , 'multipart/form-data');
-    // headers.append('Access-Control-Allow-Headers', '*');
-    // headers.append('Access-Control-Allow-Methods', '*');
-    // headers.append('Access-Control-Allow-Origin', '*');
     return this.http.post(this.url + this.paths.uploadFile + type, formData)
       .map((response: Response) => {
         return response.text();
