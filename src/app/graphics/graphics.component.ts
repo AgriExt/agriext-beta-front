@@ -10,8 +10,7 @@ export class GraphicsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-        
+  ngOnChanges() {
     let head = Object.keys(this.datas[0]).filter(function (title) {
       return title != "codigo_estacao" && title != "data" && title != "_id" && title != "" && title != "hora";
     });
@@ -36,6 +35,34 @@ export class GraphicsComponent implements OnInit {
 
       this.listCharts.push(obj);
     }
+  }
+
+  ngOnInit() {
+
+    // let head = Object.keys(this.datas[0]).filter(function (title) {
+    //   return title != "codigo_estacao" && title != "data" && title != "_id" && title != "" && title != "hora";
+    // });
+
+    // this.listCharts = [];
+
+    // for (let title of head) {
+    //   let obj = {};
+    //   obj['title'] = title;
+    //   obj['data'] = [];
+
+    //   for (let data of this.datas) {
+    //     obj['data'].push({
+    //       "column-1": parseFloat(data[title]),
+    //       "date": data.data +" "+data.hora
+    //     });
+    //   }
+
+    //   obj['data'].sort( function(obj1, obj2) {
+    //     return parseFloat(obj1.date.split(' ')[1]) - parseFloat(obj2.date.split(' ')[1])
+    //   });
+
+    //   this.listCharts.push(obj);
+    // }
 
   }
 

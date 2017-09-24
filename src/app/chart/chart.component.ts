@@ -5,7 +5,7 @@ import { AmChartsService, AmChart } from "@amcharts/amcharts3-angular";
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
-  
+
 })
 export class ChartComponent implements OnInit {
   @Input() dataChart: any;

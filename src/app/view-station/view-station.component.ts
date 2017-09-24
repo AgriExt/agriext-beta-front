@@ -120,7 +120,12 @@ export class ViewStationComponent implements OnInit {
 
 
   public filter(event) {
+    // console.log(event);
     this.filterDate = this.mapDates[event];
+    this.mapDates[event];
+    // let div = document.querySelector('#graphics');
+    // console.log(div);
+    // div.innerHTML = '<app-graphics [datas]="filterDate" *ngIf="filterDate != null"></app-graphics>';
   }
 
   ngOnInit() { }
