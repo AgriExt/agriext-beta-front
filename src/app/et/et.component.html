@@ -4,8 +4,7 @@
     <div class="col-md-4 col-md-offset-1 text-center jumbotron">
         <h4>Escolha o modelo</h4>
 
-        <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="gerarEt($event)">
-          <option select>Selecione o modelo</option>
+        <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="findOptionModel($event)">
           <option [ngValue] = "1">Método de Jensen-Hayse</option>
           <option [ngValue] = "0">QuixadáHC</option>
         </select>
@@ -24,11 +23,17 @@
     </span>
     <div class="input-group input-group-md">
             <span class="input-group-addon" id="sizing-addon1">KC</span>
-            <input type="text" class="form-control" placeholder="Adicione o Kc" aria-describedby="sizing-addon1">
+            <input type="text" class="form-control" placeholder="Adicione o Kc" aria-describedby="sizing-addon1" [(ngModel)]="kc">
         </div>
+        <br>
+        <button type="button" class="btn btn-info btn-md btn-block" (click)="run()">executar</button>
+        <br>    </div>
+
+    <div class="input-group input-group-md">
+
     </div>
 
-    <div class="col-md-6 col-md-offset-1 text-center jumbotron">
+    <div class="col-md-6 col-md-offset-1 text-center jumbotron" *ngIf="listET_kcEt != null">
         <h4>Resultado</h4>
         <div class="text-center">
             <br>
@@ -41,9 +46,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>0.2591522</td>
-                            <td>0.1814066</td>
+                        <tr *ngFor="let item of listET_kcEt">
+                            <td>{{item.split(',')[0]}}</td>
+                            <td>{{item.split(',')[1]}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -54,7 +59,7 @@
             <span class="input-group-addon" id="sizing-addon1">
                 ÁGUA(mm/dia) EVAPOTRANSPIRADA</span>
             <fieldset disabled>
-                <input type="text" class="form-control" placeholder="3.93021" aria-describedby="sizing-addon1">
+                <input type="text" class="form-control" placeholder="{{evapotranspirada}}" aria-describedby="sizing-addon1">
             </fieldset>
         </div>
         <div class="input-group input-group-md">
@@ -62,7 +67,7 @@
                 ÁGUA(mm/dia) PARA A IRRIGAÇÃO
             </span>
             <fieldset disabled>
-                <input type="text" class="form-control" placeholder="5.614585" aria-describedby="sizing-addon1">
+                <input type="text" class="form-control" placeholder="{{irrigacao}}" aria-describedby="sizing-addon1">
             </fieldset>
         </div>
     </div>

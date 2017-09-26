@@ -1,5 +1,6 @@
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-generate-model',
@@ -21,7 +22,12 @@ export class GenerateModelComponent implements OnInit {
       console.log(data);
       this.avaliacao = dataSplit[0];
       this.modelo = dataSplit[1];
-    });  
+    });
+  }
+
+  getURL() {
+    return "http://200.129.38.177:8080/data/download/" + sessionStorage.getItem('csv-name').replace('.csv','');
+    // return "http://200.129.38.177:8080/data/download/" + sessionStorage.getItem('csv-name');
   }
 
 }

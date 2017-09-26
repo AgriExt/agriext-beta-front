@@ -9,7 +9,6 @@
         <div class="col-md-4 col-md-offset-1 text-center jumbotron">
             <h4>Algoritmos de classificação</h4>
             <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="gerar($event)">
-              <option selected>Selecione o algoritmo</option>
               <option [ngValue] = "1">Regressão Linear</option>
               <option [ngValue] = "0">M5P</option>
           </select>
@@ -43,7 +42,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <button type="button" class="btn btn-info btn-md">EXPORTAR (.model)</button>
+                <a class="btn btn-info btn-md" href="{{getURL()}}" download="model.model">EXPORTAR (.model)</a>
             </div>
 
         </div>
