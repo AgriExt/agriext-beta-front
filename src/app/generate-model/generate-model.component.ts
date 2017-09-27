@@ -19,7 +19,7 @@ export class GenerateModelComponent implements OnInit {
   gerar(type) {
     this.restService.gerarModelo(sessionStorage.getItem('csv-name'), sessionStorage.getItem('csv-body'), type).subscribe((data) => {
       let dataSplit = data.split('smashline');
-      console.log(data);
+      // console.log(data);
       this.avaliacao = dataSplit[0];
       this.modelo = dataSplit[1];
 

@@ -1,3 +1,4 @@
+import { UploadFile } from './../../util/UploadFile';
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,19 +14,40 @@ export class EtComponent implements OnInit {
   evapotranspirada = null;
   irrigacao = null;
   listET_kcEt = null;
+  fileModel = null;
+
+  private uploadFile: UploadFile;
 
   modelos = {
     JENSEN_HAYSE: 1,
     HC: 0
   }
 
-  constructor(private restService: RestService) { }
+  constructor(private restService: RestService) {
+    this.uploadFile = new UploadFile();
+  }
 
   ngOnInit() {
   }
 
   findOptionModel(value) {
     this.optionModel = value;
+  }
+
+  upload(fileInput) {
+    let self = this;
+    self.uploadFile.read(fileInput.files[0], [
+      {
+        event: "loadend",
+        callback: function () {
+          self.fileModel = this.result;
+          console.log(this.result);
+          // self.restService.gerarEtModel(sessionStorage.getItem('csv-name'), sessionStorage.getItem('csv-body'), this.result, self.kc)
+          //   .subscribe(function (data) {
+          //     console.log(data);
+        }
+      }
+    ]);
   }
 
   private generateListEt0(mapDates, kc) {
@@ -44,7 +66,7 @@ export class EtComponent implements OnInit {
       listEt0.push(et0_EtKc.join(','));
     }
 
-    return listEt0.slice(0, listEt0.length-1);
+    return listEt0.slice(0, listEt0.length - 1);
   }
 
 
@@ -114,12 +136,18 @@ export class EtComponent implements OnInit {
   }
 
   run() {
-    if (this.kc != null && this.optionModel != null) {
+    if (this.fileModel != null && this.kc != null) {
+      this.restService.gerarEtModel(sessionStorage.getItem('csv-name'), sessionStorage.getItem('csv-body'), this.fileModel, this.kc)
+        .subscribe(function (data) {
+          console.log(data);
+        })
+    }
+    else if (this.kc != null && this.optionModel != null) {
       if (this.optionModel == this.modelos.JENSEN_HAYSE) {
         let mapDate = this.datesDay();
         this.listET_kcEt = this.generateListEt0(mapDate, this.kc);
         this.evapotranspirada = 0;
-        for(let row of this.listET_kcEt) {
+        for (let row of this.listET_kcEt) {
           let splitRow = row.split(',');
           this.evapotranspirada += parseFloat(splitRow[0]);
         }
