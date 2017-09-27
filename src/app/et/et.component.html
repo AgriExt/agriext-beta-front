@@ -13,7 +13,7 @@
         <div class="input-group">
             <label class="input-group-btn">
             <span class="btn btn-info">
-                Buscar&hellip; <input type="file" style="display: none;" multiple>
+                Buscar&hellip; <input type="file" style="display: none;" multiple (change)="upload($event.target)">
             </span>
         </label>
             <input type="text" class="form-control" readonly>
