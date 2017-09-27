@@ -22,12 +22,16 @@ export class GenerateModelComponent implements OnInit {
       console.log(data);
       this.avaliacao = dataSplit[0];
       this.modelo = dataSplit[1];
+
     });
   }
 
   getURL() {
-    return "http://200.129.38.177:8080/data/download/" + sessionStorage.getItem('csv-name').replace('.csv','');
-    // return "http://200.129.38.177:8080/data/download/" + sessionStorage.getItem('csv-name');
+    console.log(sessionStorage.getItem('csv-name'));
+    //return "http://localhost:8080/data/download";
+
+    // return "http://200.129.38.177:8080/data/download/" + sessionStorage.getItem('csv-name').replace('.csv','');
+    return "http://localhost:8080/data/download/" + sessionStorage.getItem('csv-name')+".model";
   }
 
 }

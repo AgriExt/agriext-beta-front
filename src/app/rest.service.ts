@@ -7,7 +7,7 @@ export class RestService {
 
   DataSet: any[] = [];
 
-  private url = 'http://10.0.63.77:8080/data/';
+  private url = 'http://localhost:8080/data/';
   private paths = {
     uploadFile: 'uploadFile/',
     downloadModel: 'download/'
