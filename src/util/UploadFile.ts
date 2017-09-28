@@ -10,6 +10,7 @@ export class UploadFile {
         events.forEach((event) => {
             this.file.addEventListener(event.event, event.callback.bind(this.file));
         });
+        console.log(this.file);
         this.file.readAsText(file);
     }
 }

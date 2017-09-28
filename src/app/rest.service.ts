@@ -43,8 +43,9 @@ export class RestService {
 
   gerarEtModel(csv_name, csv_body, model, kc) {
     let file = new File([csv_body], csv_name, { type: 'text/csv' });
-    let fileModel = new File([model], 'model',  { type: 'text/model' });
-    // console.log(fileModel);
+    let fileModel = new File([model], 'model');
+
+    console.log(fileModel.type);
     // console.log(model instanceof File);
 
     let formData = new FormData();
