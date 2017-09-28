@@ -61,12 +61,6 @@
             <!-- <option selected>Selecione o dia</option> -->
             <option *ngFor="let date of getDates()" [ngValue]="date">{{date}}</option>
         </select>
-        <!--
-        <select class="form-control" name="sel" [(ngModel)]="selectedWorkout" (ngModelChange)="updateWorkout($event)">
-            <option *ngFor="let workout of workouts" [ngValue]="workout">
-                {{workout.name}}
-            </option>
-        </select> -->
     </div>
 </div>
 

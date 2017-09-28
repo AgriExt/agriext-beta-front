@@ -43,16 +43,13 @@ export class RestService {
 
   gerarEtModel(csv_name, csv_body, model, kc) {
     let file = new File([csv_body], csv_name, { type: 'text/csv' });
-    let fileModel = new File([model], 'model');
-
-    console.log(fileModel.type);
+    let fileModel = new File([model], 'teste.model');
     // console.log(model instanceof File);
 
     let formData = new FormData();
     formData.append('file', file, file.name);
-    formData.append('model', fileModel, fileModel.name);
+    formData.append('model', fileModel);
     formData.append('kc', kc);
-
     // console.log(formData);
 
     return this.http.post(this.url + this.paths.uploadModel, formData)

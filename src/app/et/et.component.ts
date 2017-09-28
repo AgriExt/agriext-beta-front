@@ -137,6 +137,7 @@ export class EtComponent implements OnInit {
 
   run() {
     if (this.fileModel != null && this.kc != null) {
+      console.log(this.fileModel+"teste");
       this.restService.gerarEtModel(sessionStorage.getItem('csv-name'), sessionStorage.getItem('csv-body'), this.fileModel, this.kc)
         .subscribe(function (data) {
           console.log(data);
