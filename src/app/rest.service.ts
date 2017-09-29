@@ -7,7 +7,7 @@ export class RestService {
 
   DataSet: any[] = [];
 
-  private url = 'http://localhost:8080/data/';
+  private url = 'http://200.129.38.177:8080/data/';
 
   private paths = {
     uploadFile: 'uploadFile/',
@@ -17,8 +17,36 @@ export class RestService {
 
   constructor(private http: Http) { }
 
+  makeCsv(csv_body) {
+    let csv = csv_body.split(/\n/);
+    let head = csv[0].split(',');
+    let indexData = head.indexOf('data'),
+      indexHora = head.indexOf('hora'),
+      indexRecord = head.indexOf('record'),
+      indexCodEst = head.indexOf('codigo_estacao');
+
+    let newCsvBody = [];
+    for (let row of csv) {
+      let splitRow = row.split(',');
+
+      let newRow = splitRow.filter(function (value) {
+        if (value != splitRow[indexData] && value != splitRow[indexHora]) {
+          if (indexRecord != -1 && value != splitRow[indexRecord]) {
+            return true;
+          }
+          if (indexCodEst != -1 && value != splitRow[indexCodEst]) {
+            return true;
+          }
+        }
+        return false;
+      });
+      newCsvBody.push(newRow.join(","));
+    }
+    return newCsvBody.join("\n");
+  }
+
   gerarModelo(csv_name, csv_body, type) {
-    let file = new File([csv_body], csv_name, { type: 'text/csv' });
+    let file = new File([this.makeCsv(csv_body)], csv_name, { type: 'text/csv' });
     let formData = new FormData();
     formData.append('file', file, file.name);
     return this.http.post(this.url + this.paths.uploadFile + type, formData)
@@ -29,7 +57,7 @@ export class RestService {
   }
 
   gerarEt(csv_name, csv_body, kc) {
-    let file = new File([csv_body], csv_name, { type: 'text/csv' });
+    let file = new File([this.makeCsv(csv_body)], csv_name, { type: 'text/csv' });
     let formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('kc', kc);
@@ -42,15 +70,13 @@ export class RestService {
   }
 
   gerarEtModel(csv_name, csv_body, model, kc) {
-    let file = new File([csv_body], csv_name, { type: 'text/csv' });
-    let fileModel = new File([model], 'teste.model');
-    // console.log(model instanceof File);
+    let file = new File([this.makeCsv(csv_body)], csv_name, { type: 'text/csv' });
+    let fileModel = new File([model], 'teste' + '.model', { type: 'application/octet-stream' });
 
     let formData = new FormData();
     formData.append('file', file, file.name);
-    formData.append('model', fileModel);
+    formData.append('model', fileModel, fileModel.name);
     formData.append('kc', kc);
-    // console.log(formData);
 
     return this.http.post(this.url + this.paths.uploadModel, formData)
       .map((response: Response) => {

@@ -1,69 +1,71 @@
+
+
 <div class="row jumbotron">
-    <!-- Small button group-->
-    <div class="col-md-4 text-center">
-        <br>
-        <select class="form-control form-control-md">
+  <!-- Small button group-->
+  <div class="col-md-4 text-center">
+    <br>
+    <select class="form-control form-control-md">
             <option selected>Selecione a estação</option>
             <option value="">Fortaleza</option>
             <option value="">Quixadá</option>
             <option value="">Quixeramobim</option>
         </select>
-        <br>
-        <p>ou</p>
-        <div class="text-center">
-            <h4>Carregue o seu CSV</h4>
-        </div>
-        <div class="input-group">
-          <label class="input-group-btn">
+    <br>
+    <p>ou</p>
+    <div class="text-center">
+      <h4>Carregue o seu CSV</h4>
+    </div>
+    <div class="input-group">
+      <label class="input-group-btn">
             <span class="btn btn-info">
               Browse&hellip; <input type="file" style="display: none;" multiple (change)="upload($event.target)">
             </span>
           </label>
-          <input type="text" class="form-control" readonly>
-        </div>
-        <span class="help-block">
+      <input type="text" class="form-control" readonly>
+    </div>
+    <span class="help-block">
   Selecione o seu dataset para visualizar.
 </span>
-    </div>
+  </div>
 
-    <div class="col-md-7 col-md-offset-1 text-center">
-        <br>
-        <div class="tdados" *ngIf="list != null">
-            <table class="table table-bordered table-sm">
-                <thead>
-                    <tr>
-                        <th>Atributo</th>
-                        <th>AVG</th>
-                        <th>MAX</th>
-                        <th>MIN</th>
-                    </tr>
+  <div class="col-md-7 col-md-offset-1 text-center">
+    <br>
+    <div class="tdados" *ngIf="list != null">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th>Atributo</th>
+            <th>AVG</th>
+            <th>MAX</th>
+            <th>MIN</th>
+          </tr>
 
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of getHead()">
-                        <th>{{item}}</th>
-                        <td>{{avg(item)}}</td>
-                        <td>{{max(item)}}</td>
-                        <td>{{min(item)}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of getHead()">
+            <th>{{item}}</th>
+            <td>{{avg(item)}}</td>
+            <td>{{max(item)}}</td>
+            <td>{{min(item)}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 
 <div class="row header text-center" *ngIf="mapDatesIsNotNull()">
-    <div class="col-md-12">
-        <h3>
-            Selecione o dia que desejar visualizar
-        </h3>
-        <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="filter($event)">
+  <div class="col-md-12">
+    <h3>
+      Selecione o dia que desejar visualizar
+    </h3>
+    <select class="form-control form-control-md" [(ngModel)]="select" (ngModelChange)="filter($event)">
             <!-- <option selected>Selecione o dia</option> -->
             <option *ngFor="let date of getDates()" [ngValue]="date">{{date}}</option>
         </select>
-    </div>
+  </div>
 </div>
 
 <div id="graphics">
-    <app-graphics [datas]="filterDate" *ngIf="filterDate != null"></app-graphics>
+  <app-graphics [datas]="filterDate" *ngIf="filterDate != null"></app-graphics>
 </div>

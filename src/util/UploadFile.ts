@@ -6,11 +6,17 @@ export class UploadFile {
         this.file = new FileReader();
     }
 
-    read(file, events): void {
+    readFile(file, events): void {
         events.forEach((event) => {
             this.file.addEventListener(event.event, event.callback.bind(this.file));
         });
-        console.log(this.file);
-        this.file.readAsText(file);
+        this.file.readAsArrayBuffer(file);
     }
+
+    read(file, events): void {
+      events.forEach((event) => {
+          this.file.addEventListener(event.event, event.callback.bind(this.file));
+      });
+      this.file.readAsBinaryString(file);
+  }
 }

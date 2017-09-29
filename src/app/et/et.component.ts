@@ -36,15 +36,12 @@ export class EtComponent implements OnInit {
 
   upload(fileInput) {
     let self = this;
-    self.uploadFile.read(fileInput.files[0], [
+    self.uploadFile.readFile(fileInput.files[0], [
       {
         event: "loadend",
         callback: function () {
           self.fileModel = this.result;
-          console.log(this.result);
-          // self.restService.gerarEtModel(sessionStorage.getItem('csv-name'), sessionStorage.getItem('csv-body'), this.result, self.kc)
-          //   .subscribe(function (data) {
-          //     console.log(data);
+          console.log(1,this.result);
         }
       }
     ]);
@@ -139,8 +136,11 @@ export class EtComponent implements OnInit {
     if (this.fileModel != null && this.kc != null) {
       console.log(this.fileModel+"teste");
       this.restService.gerarEtModel(sessionStorage.getItem('csv-name'), sessionStorage.getItem('csv-body'), this.fileModel, this.kc)
-        .subscribe(function (data) {
-          console.log(data);
+        .subscribe((data) => {
+          let array = data.split(/\n/);
+          this.listET_kcEt = array.slice(0, array.length - 1);
+          this.evapotranspirada = array[array.length - 1].split(',')[0];
+          this.irrigacao = array[array.length - 1].split(',')[1];
         })
     }
     else if (this.kc != null && this.optionModel != null) {
@@ -160,7 +160,6 @@ export class EtComponent implements OnInit {
           .subscribe((data) => {
             let array = data.split(/\n/);
             this.listET_kcEt = array.slice(0, array.length - 1);
-            console.log(this.listET_kcEt);
             this.evapotranspirada = array[array.length - 1].split(',')[0];
             this.irrigacao = array[array.length - 1].split(',')[1];
           });

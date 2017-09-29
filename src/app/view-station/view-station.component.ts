@@ -1,6 +1,4 @@
-// import { RestStationService } from './../rest-station.service';
 import { Component, OnInit } from '@angular/core';
-
 import { UploadFile } from './../../util/UploadFile';
 import { csvToJson } from './../../util/CsvToJson';
 
@@ -118,14 +116,9 @@ export class ViewStationComponent implements OnInit {
     return this.mapDates !== null;
   }
 
-
   public filter(event) {
-    // console.log(event);
     this.filterDate = this.mapDates[event];
     this.mapDates[event];
-    // let div = document.querySelector('#graphics');
-    // console.log(div);
-    // div.innerHTML = '<app-graphics [datas]="filterDate" *ngIf="filterDate != null"></app-graphics>';
   }
 
   ngOnInit() { }
