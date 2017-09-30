@@ -26,7 +26,7 @@ export class GenerateModelComponent implements OnInit {
   }
 
   getURL() {
-    return "http://200.129.38.177:8080/data/download/" + sessionStorage.getItem('csv-name').replace('.csv','')+".model";
+    return "http://localhost:8080/data/download/" + sessionStorage.getItem('csv-name').replace('.csv','')+".model";
   }
 
 }
