@@ -45,6 +45,7 @@ export class RestService {
   }
 
   gerarModelo(csv_name, csv_body, type) {
+    console.log(this.makeCsv(csv_body));
     let file = new File([this.makeCsv(csv_body)], csv_name, { type: 'text/csv' });
     let formData = new FormData();
     formData.append('file', file, file.name);

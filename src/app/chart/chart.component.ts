@@ -44,7 +44,7 @@ export class ChartComponent implements OnInit {
       "valueAxes": [
         {
           "id": "ValueAxis-1",
-          "title": "Valores em (ºC)"
+          "title": ""
         }
       ],
       "allLabels": [],
