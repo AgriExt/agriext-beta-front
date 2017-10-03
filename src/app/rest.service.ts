@@ -36,6 +36,7 @@ export class RestService {
           if (indexCodEst != -1 && value != splitRow[indexCodEst]) {
             return true;
           }
+          return true;
         }
         return false;
       });
@@ -57,6 +58,7 @@ export class RestService {
   }
 
   gerarEt(csv_name, csv_body, kc) {
+    console.log(this.makeCsv(csv_body));
     let file = new File([this.makeCsv(csv_body)], csv_name, { type: 'text/csv' });
     let formData = new FormData();
     formData.append('file', file, file.name);
