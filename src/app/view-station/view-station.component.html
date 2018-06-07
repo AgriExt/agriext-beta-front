@@ -30,6 +30,9 @@
 
   <div class="col-md-7 col-md-offset-1 text-center">
     <br>
+    <div class="loading"
+    *ngIf="list ==null">
+  </div>
     <div class="tdados" *ngIf="list != null">
       <table class="table table-bordered table-sm">
         <thead>
@@ -67,5 +70,9 @@
 </div>
 
 <div id="graphics">
+  <br><br>
+  <div class="loading"
+    *ngIf="filterDate==null">
+  </div>
   <app-graphics [datas]="filterDate" *ngIf="filterDate != null"></app-graphics>
 </div>

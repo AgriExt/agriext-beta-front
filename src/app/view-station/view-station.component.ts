@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Self } from '@angular/core';
 import { UploadFile } from './../../util/UploadFile';
 import { csvToJson } from './../../util/CsvToJson';
 
@@ -8,12 +8,13 @@ import { csvToJson } from './../../util/CsvToJson';
   styleUrls: ['./view-station.component.css']
 })
 export class ViewStationComponent implements OnInit {
-
+  // static session = 0;
+  // private nomes: String[] = [];
   private uploadFile: UploadFile;
   private list: any;
   private mapDates: any;
   filterDate = null;
-
+  dado: any;
   constructor() {
 
     this.uploadFile = new UploadFile();
@@ -23,12 +24,11 @@ export class ViewStationComponent implements OnInit {
     if (sessionStorage.getItem('csv-body')) {
       this.list = csvToJson(sessionStorage.getItem('csv-body'));
       this.mapDates = {};
-      for (let obj of this.getBody()) {
+      for (const obj of this.getBody()) {
         if (!this.mapDates[obj.data]) {
           this.mapDates[obj.data] = [];
           this.mapDates[obj.data].push(obj);
-        }
-        else {
+        } else {
           this.mapDates[obj.data].push(obj);
         }
       }
@@ -38,27 +38,36 @@ export class ViewStationComponent implements OnInit {
 
 
   public upload(fileInput) {
-    let self = this;
-    self.uploadFile.read(fileInput.files[0], [
+    const self = this;
+    let csv: File = fileInput.files[0];
+    self.uploadFile.read(csv, [
       {
-        event: "loadend",
+        event: 'loadend',
         callback: function () {
-          // console.log(fileInput.files[0]);
-          sessionStorage.setItem('csv-body', this.result);
-          sessionStorage.setItem('csv-name', fileInput.files[0].name);
-          self.list = csvToJson(this.result);
-          self.mapDates = {};
+          // self.nomes.push(csv.name);
+          // console.log(self.nomes);
+          // for (const n in self.nomes) {
+          //   if (self.nomes[i] !== csv.name) {
 
-          for (let obj of self.getBody()) {
-            if (!self.mapDates[obj.data]) {
-              self.mapDates[obj.data] = [];
-              self.mapDates[obj.data].push(obj);
-            }
-            else {
-              self.mapDates[obj.data].push(obj);
-            }
-          }
+          //   }
+          // }
+          // console.log(sessionStorage.length + '--' + ViewStationComponent.session);
+              self.dado = this.result;
+              console.log(self.dado);
 
+              sessionStorage.setItem('csv-name', csv.name);
+              sessionStorage.setItem('csv-body', this.result);
+              // ViewStationComponent.session++;
+              self.list = csvToJson(this.result);
+              self.mapDates = {};
+              for (const obj of self.getBody()) {
+                if (!self.mapDates[obj.data]) {
+                  self.mapDates[obj.data] = [];
+                  self.mapDates[obj.data].push(obj);
+                } else {
+                  self.mapDates[obj.data].push(obj);
+                }
+              }
         }
       }
     ]);
@@ -66,7 +75,7 @@ export class ViewStationComponent implements OnInit {
 
   public getHead() {
     return Object.keys(this.list[0]).filter((key) => {
-      return key !== "" && key !== "_id" && key !== "codigo_estacao" && key !== "data" && key !== "hora";
+      return key !== '' && key !== '_id' && key !== 'codigo_estacao' && key !== 'data' && key !== 'hora';
     });
   }
 
@@ -80,7 +89,7 @@ export class ViewStationComponent implements OnInit {
 
   public avg(item) {
     let sum = 0;
-    for (let x of this.getBody()) {
+    for (const x of this.getBody()) {
       sum += parseFloat(x[item]) || 0;
     }
     return (sum / (this.getBody().length - 1)).toFixed(2);
@@ -88,7 +97,7 @@ export class ViewStationComponent implements OnInit {
 
   public min(item) {
     let smaller = parseFloat(this.getBody()[0][item]);
-    for (let obj of this.getBody()) {
+    for (const obj of this.getBody()) {
       if (parseFloat(obj[item]) < smaller) {
         smaller = parseFloat(obj[item]);
       }
@@ -98,7 +107,7 @@ export class ViewStationComponent implements OnInit {
 
   public max(item) {
     let larger = parseFloat(this.getBody()[0][item]);
-    for (let obj of this.getBody()) {
+    for (const obj of this.getBody()) {
       if (parseFloat(obj[item]) > larger) {
         larger = parseFloat(obj[item]);
       }
@@ -108,7 +117,7 @@ export class ViewStationComponent implements OnInit {
 
   public getDates() {
     return Object.keys(this.mapDates).filter((key) => {
-      return key !== "" && key !== "undefined";
+      return key !== '' && key !== 'undefined';
     });
   }
 
@@ -118,6 +127,7 @@ export class ViewStationComponent implements OnInit {
 
   public filter(event) {
     this.filterDate = this.mapDates[event];
+    // tslint:disable-next-line:no-unused-expression
     this.mapDates[event];
   }
 

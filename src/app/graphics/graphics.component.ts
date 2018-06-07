@@ -25,6 +25,7 @@ export class GraphicsComponent implements OnInit {
       for (let data of this.datas) {
         obj['data'].push({
           "column-1": parseFloat(data[title]),
+          "column-2": 5.3,
           "date": data.data +" "+data.hora
         });
       }

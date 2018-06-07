@@ -38,7 +38,15 @@ export class ChartComponent implements OnInit {
           "id": "AmGraph-1",
           "title": "Valores obtidos",
           "valueField": "column-1"
+        },
+        {
+          "bullet": "square",
+          "id": "AmGraph-2",
+          "title": "Valores obtidos",
+          "lineColor": "#008000",
+          "valueField": "column-2"
         }
+
       ],
       "guides": [],
       "valueAxes": [

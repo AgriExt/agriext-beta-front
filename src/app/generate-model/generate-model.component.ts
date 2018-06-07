@@ -8,17 +8,18 @@ import 'rxjs/Rx';
 })
 export class GenerateModelComponent implements OnInit {
 
-  constructor(private restService: RestService) { }
-
   modelo = null;
   avaliacao = null;
+
+  constructor(private restService: RestService) { }
 
   ngOnInit() {
   }
 
   gerar(type) {
-    this.restService.gerarModelo(sessionStorage.getItem('csv-name').replace('.csv', ''), sessionStorage.getItem('csv-body'), type).subscribe((data) => {
-      let dataSplit = data.split('smashline');
+    this.restService.gerarModelo(sessionStorage.getItem('csv-name').replace('.csv', ''),
+                                  sessionStorage.getItem('csv-body'), type).subscribe((data) => {
+      const dataSplit = data.split('smashline');
       this.avaliacao = dataSplit[0];
       this.modelo = dataSplit[1];
 
